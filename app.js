@@ -17,3 +17,7 @@ web3.eth.getBalance(address, (error, balance) =>{
         console.log(error)
     }
 });
+
+//create wallet
+let wallet = web3.eth.accounts.wallet.create(1, 'myWallet');
+console.log(wallet[0])
