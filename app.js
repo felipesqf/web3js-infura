@@ -17,7 +17,14 @@ web3.eth.getBalance(address, (error, balance) =>{
         console.log(error)
     }
 });
+//get block number (it return a promise)
+web3.eth.getBlockNumber().then(res => console.log("the current block is: " + res))
 
+//get the block info/// you need to pass the block or 'latest' or 'pending' for ne next block as string// it also return a promise
+web3.eth.getBlock('latest').then(block => console.log(block))
+
+//get transaction hash from the block
+web3.eth.getTransactionFromBlock(11425456, 2).then(trans => console.log(trans))
 //create wallet
 let wallet = web3.eth.accounts.wallet.create(1, 'myWallet');
 console.log(wallet[0])
