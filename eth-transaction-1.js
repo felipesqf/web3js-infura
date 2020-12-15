@@ -1,4 +1,4 @@
-const Tx = require("ethereumjs-tx");
+const { Transaction } = require('@ethereumjs/tx')
 const { serialize } = require("v8");
 let Web3 = require("web3");
 //ropsten testnet
@@ -12,13 +12,16 @@ let web3 = new Web3(url_infura);
 // console.log(web3.eth.accounts.create())
 
 const accountOne = "0x3fE5b3dB034620D6eC5cD66219f9f48e6a8459C0";
-const privateKeyOne = Buffer.from('0x30d05b4ca4605fa0c7e096baf41d46c90e92be70b96dab9b3827e7a41868556a', 'hex',)
+const privateKey = Buffer.from(
+    '0x30d05b4ca4605fa0c7e096baf41d46c90e92be70b96dab9b3827e7a41868556a',
+    'hex',
+  )
 const accountTwo = "0x242a7F38D18b013770d5120ACB45605df9eC6762";
 
-web3.eth.getBalance(accountTwo, (err, res) => console.log(res))
+// web3.eth.getBalance(accountTwo, (err, res) => console.log(res))
 
 //get nounce
-webb3.eth.getTransactionCount(accountOne, (err, txCount) =>{
+web3.eth.getTransactionCount(accountOne, (err, txCount) =>{
     //build transaction object 
     const txObject = {
         nonce: web3.utils.toHex(txCount),
@@ -30,12 +33,12 @@ webb3.eth.getTransactionCount(accountOne, (err, txCount) =>{
     console.log(txObject)
 
     //sign transaction with private jey of the sender
-    const tx = new Tx(txObject)
-    tx.sign(privateKeyOne)
+    const tx = new Transaction(txObject)
+    tx.sign(privateKey)
 
     //serialize the transaction
     const serializeTx = tx.serialize()
-    const raw = '0x' + serializedTransaction.toString('hex')
+    const raw = '0x' + serializeTx.toString('hex')
 
 
     // broadcast the transaciton to the network
